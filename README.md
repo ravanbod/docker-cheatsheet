@@ -119,4 +119,25 @@ You can mount a volume using `-v or --volume` and `-w or --workdir` to change wo
 
 `docker run -v $PWD/test:/data -w /data alpine`
 
-It will mount `$PWD/test` of host to `/data` of container
+It will mount `$PWD/test` of host to `/data` of container.
+
+# Dockerfile
+
+Just an example ...
+
+```
+ARG VERSION=latest
+FROM alpine:$VERSION
+ENV CLASS=dws
+
+RUN apk add nginx
+
+EXPOSE 80/tcp
+
+VOLUME /data
+
+ADD . /data
+COPY . /data
+
+ENTRYPOINT ["nginx", "-s" , "start"]
+```
